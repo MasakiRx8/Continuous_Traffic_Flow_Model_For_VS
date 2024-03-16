@@ -33,8 +33,8 @@ Simulation::~Simulation() {
 	Perform calculations for each number of cars and create results.
 */
 void Simulation::simulate() {
-	CreateNLists();
-	WriteCSVHeaderToCSV();
+	bool&& isFirstSimulation = CreateNLists();
+	WriteCSVHeaderToCSV(isFirstSimulation);
 #ifdef _OPENMP
 #pragma omp parallel for schedule(guided)
 #endif //  _OPENMP
@@ -84,8 +84,8 @@ void Simulation::simulate() {
 /*
 	A function that creates the NLists excluding those that results have already been created.
 */
-void Simulation::CreateNLists() {
-	isFirstSimulation = true;
+bool  Simulation::CreateNLists() {
+	bool isFirstSimulation = true;
 	std::ifstream ifs(fGlovalVDPath);
 	std::size_t listSize = ModelParameters->NMax;
 	std::vector<bool> NListsFG(listSize, true);
@@ -120,12 +120,13 @@ void Simulation::CreateNLists() {
 			}
 		}
 	}
+	return isFirstSimulation;
 }
 
 /*
 	Write each header to CSV when this is simulated it for the first time.
 */
-void Simulation::WriteCSVHeaderToCSV() {
+void Simulation::WriteCSVHeaderToCSV(const bool& isFirstSimulation) {
 	if (isFirstSimulation) {
 		std::ofstream ofsFD(fFDPath, std::ios::app);
 		std::ofstream ofsGlovalVD(fGlovalVDPath, std::ios::app);
