@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 	if (argc == 1) {
 		IniFileNumber = 54;
 		RunNumber = 0;
-		CreateSnapShot = false;
+		CreateSnapShot = true;
 		CloseWhenFinished = false;
 	}
 	else {
