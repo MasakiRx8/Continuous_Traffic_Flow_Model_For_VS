@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 	if (argc == 1) {
 		IniFileNumber = 54;
 		RunNumber = 0;
-		CreateSnapShot = false;
+		CreateSnapShot = true;
 		CloseWhenFinished = false;
 	}
 	else {
@@ -37,8 +37,8 @@ int main(int argc, char *argv[]) {
 			CloseWhenFinished = true;
 		}
 	}
-	std::string IniFileFolderPath = R"(../IniFiles)";	//The path to the folder where the ".ini" initialization file is saved.
-	std::string ResultFileFolderPath = R"(../Result)";	//The path to the ".csv" where the results will be written.
+	std::string IniFileFolderPath = R"(../../IniFiles)";	//The path to the folder where the ".ini" initialization file is saved.
+	std::string ResultFileFolderPath = R"(../../Result)";	//The path to the ".csv" where the results will be written.
 	std::string SnapShotFolderPath = ResultFileFolderPath + R"(/SnapShot/Ini)" + std::to_string(IniFileNumber);	//The path to the ".csv" where the snap shots will be written.
 
 	Simulation simulation(IniFileFolderPath, IniFileNumber, RunNumber, ResultFileFolderPath, CreateSnapShot, SnapShotFolderPath);
